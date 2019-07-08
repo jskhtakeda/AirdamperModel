@@ -1,0 +1,95 @@
+\newcommand{\paren}[1]{\left({#1}\right)}
+
+\documentclass{jsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{cases}
+
+\begin{document}
+
+断熱変化を仮定
+
+\begin{align}
+  \frac{p}{p_0} &= \paren{\frac{\rho}{\rho_0}}^{\gamma}  
+\end{align}
+
+質量保存則
+
+\begin{align}
+  \rho_0 A_p h_p &= \rho A_p \paren{h_p - y} + \int_0^t Q dt
+\end{align}
+
+ベルヌーイ流れを仮定
+
+\begin{align}
+  Q = \int_0^t c_0 A_0 \sqrt{2 \rho_0 \paren{p - p_0}} dt
+\end{align}
+
+$\rho$と$Q$を代入消去して
+
+\begin{align}
+  1 = \paren{\frac{p}{p_0}}^{\frac{1}{\gamma}} \paren{1 - \frac{y}{h_p}} + \frac{c_0 A_0 \sqrt{2 \rho_0}}{\rho_0 A_p h_p} \int_0^t \sqrt{p_0} \sqrt{\frac{p}{p_0} - 1} dt
+\end{align}
+
+$P = \frac{p - p_0}{p_0}$，$Y = \frac{y}{h_p}$とおいて
+
+\begin{align}
+  1 = \paren{1 + P}^{\frac{1}{\gamma}} \paren{1 - Y} + \frac{c_0 A_0}{A_p h_p} \sqrt{\frac{2 p_0}{\rho_0}} \int_0^t \sqrt{P} dt
+\end{align}
+
+$C = \frac{c_0 A_0}{A_p h_p} \sqrt{\frac{2 p_0}{\rho_0}}$とおいて
+
+\begin{align}
+  \paren{1 - Y} \paren{1 + P}^{\frac{1}{\gamma}} = 1 - C \int_0^t \sqrt{P} dt
+\end{align}
+
+$t$で微分
+
+\begin{align}
+  \frac{1}{\gamma} \paren{1 - Y} \paren{1 + P}^{\frac{1}{\gamma} - 1} \frac{dP}{dt} + C \sqrt{P} = (1 + P)^\frac{1}{\gamma} \frac{dY}{dt}
+\end{align}
+
+ここで，運動方程式は
+
+\begin{align}
+  m \ddot{y} &= m g - \paren{p - p_0} A_p \\
+  m h_p \ddot{Y} &= m g - P p_0 A_p \\
+  P &= \frac{mg}{p_0 A_p} \paren{1 - \frac{h_p \ddot{Y}}{g}} \\
+\end{align}
+
+なのでこれを代入して$P$を消去
+
+\begin{align}
+  \frac{1}{\gamma} \paren{1 - Y} \paren{\frac{m g}{p_0 A_p} \paren{1 - \frac{h_p \ddot{Y}}{g}} + 1}^{\frac{1}{\gamma} - 1} \paren{- \frac{m g}{p_0 A_p} \frac{h_p \dddot{Y}}{g}} + C \sqrt{\frac{m g}{p_0 A_p} \paren{1 - \frac{h_p \ddot{Y}}{g}}} = \paren{\frac{m g}{p_0 A_p} \paren{1 - \frac{h_p \ddot{Y}}{g}} + 1}^\frac{1}{\gamma} \dot{Y}
+\end{align}
+
+$\frac{m g}{p_0 A_p} = D$，$Y = \frac{y}{h_p}$にして
+
+\begin{align}
+  \frac{1}{\gamma}
+  \paren{1 - \frac{y}{h_p}}
+  \paren{D \paren{1 - \frac{\ddot{y}}{g}} + 1}^{\frac{1}{\gamma} - 1}
+  \paren{- D \frac{\dddot{y}}{g}}
+  + C \sqrt{D \paren{1 - \frac{\ddot{y}}{g}}}
+  = \paren{D \paren{1 - \frac{\ddot{y}}{g}} + 1}^\frac{1}{\gamma} \frac{\dot{y}}{h_p}
+\end{align}
+
+$y_0 = y$，$y_1 = \dot{y}$，$y_2 = \dot{y_1} = \ddot{y}$とおくと，
+
+\begin{numcases}
+  {}
+  \dot{y_0} = y_1 & \\
+  \dot{y_1} = y_2 & \\
+  \dot{y_2} = \frac{
+    C \sqrt{D \paren{1 - \frac{y_2}{g}}}
+    - \paren{D \paren{1 - \frac{y_2}{g}} + 1}^{\frac{1}{\gamma}} \frac{y_1}{h_p}
+  }{
+    \frac{1}{\gamma} \paren{1 - \frac{y_0}{h_p}}
+    \paren{D \paren{1 - \frac{y_2}{g}} + 1}^{\frac{1}{\gamma} - 1} \frac{D}{g}
+    } &
+\end{numcases}
+
+初期値$t = 0$（衝突直前）で$y_0 = 0$，$y_1 = v$，$y_2 = g$として，4次のルンゲクッタ
+
+\end{document}
